@@ -60,11 +60,11 @@ CFLAGS="$RPM_OPT_FLAGS -I/usr/include/g++" make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/X11/applnk/Administration,%{_bindir},%{_mandir}/man1,%{_prefix}/lib/X11/app-defaults}
+install -d $RPM_BUILD_ROOT{/usr/X11R6/share/applnk/Administration,%{_bindir},%{_mandir}/man1,%{_prefix}/lib/X11/app-defaults}
 
 make install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Administration
+install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Administration
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
@@ -74,6 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,0755)
 %attr(755,root,root) %{_bindir}/*
-/etc/X11/applnk/Administration/xosview.desktop
+/usr/X11R6/share/applnk/Administration/xosview.desktop
 %config /usr/X11R6/lib/X11/app-defaults/*
 %{_mandir}/man1/*
