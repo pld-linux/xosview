@@ -1,7 +1,56 @@
 --- xosview-1.8.1/linux/pagemeter.cc.orig	2003-10-20 03:24:32.000000000 +0200
-+++ xosview-1.8.1/linux/pagemeter.cc	2003-10-27 00:03:33.041176728 +0100
-@@ -59,8 +59,12 @@
++++ xosview-1.8.1/linux/pagemeter.cc	2003-10-27 19:32:19.498334792 +0100
+@@ -47,21 +47,61 @@
+   drawfields();
+ }
  
++static int vmstatcheck( void )
++    { 
++    std::ifstream test( "/proc/vmstat");
++    if( test )
++	    return 1;
++    else
++	    return 0;
++    }
++
+ void PageMeter::getpageinfo( void ){
+   total_ = 0;
+   char buf[MAX_PROCSTAT_LENGTH];
+-  std::ifstream stats( STATFILENAME );
++  int vmstattype = vmstatcheck();
++  std::ifstream stats( vmstattype ? "/proc/vmstat" : STATFILENAME );
+ 
+   if ( !stats ){
+     std::cerr <<"Cannot open file : " <<STATFILENAME << std::endl;
+     exit( 1 );
+   }
+ 
++  if ( vmstattype ) {
++	int oneset = 0, twoset = 0;
++	stats >> buf;
++	while(!stats.eof() && (!oneset || !twoset))
++	    {
++	    if(!strcmp(buf, "pswpin"))
++		{
++		stats >> pageinfo_[pageindex_][0];
++		stats >> buf;
++		oneset = 1;
++		continue;
++		}
++	    if(!strcmp(buf, "pswpout"))
++		{
++		stats >> pageinfo_[pageindex_][1];
++		stats >> buf;
++		twoset = 1;
++		continue;
++		}
++	    stats.ignore(MAX_PROCSTAT_LENGTH, '\n');
++	    if(stats.eof())
++		break;
++	    stats >> buf;
++	    }
++  } else
++{
    do {
      stats >>buf;
 -  } while (strncasecmp(buf, "swap", 5));
@@ -9,27 +58,88 @@
  
 +  if(stats.eof())
 +	  pageinfo_[pageindex_][0] = pageinfo_[pageindex_][1] = 0;
-+  	  // TODO (Linux 2.6): get vmstat::pswpin and vmstat::pswpout
 +  else
    stats >>pageinfo_[pageindex_][0] >>pageinfo_[pageindex_][1];
++}
  
    int oldindex = (pageindex_+1)%2;
+ 
 --- xosview-1.8.1/linux/diskmeter.cc.orig	2003-10-20 02:59:25.000000000 +0200
-+++ xosview-1.8.1/linux/diskmeter.cc	2003-10-27 00:02:56.498732024 +0100
-@@ -64,11 +64,16 @@
++++ xosview-1.8.1/linux/diskmeter.cc	2003-10-27 19:31:46.634330880 +0100
+@@ -46,12 +46,22 @@
+     drawfields();
+     }
+ 
++static int vmstatcheck( void )
++    { 
++    std::ifstream test( "/proc/vmstat");
++    if( test )
++	    return 1;
++    else
++	    return 0;
++    }
++
+ void DiskMeter::getdiskinfo( void )
+     {
+     IntervalTimerStop();
+     total_ = maxspeed_;
+     char buf[MAX_PROCSTAT_LENGTH];
+-    std::ifstream stats( STATFILENAME );
++    int vmstattype = vmstatcheck();
++    std::ifstream stats( vmstattype ? "/proc/vmstat" : STATFILENAME );
+ 
+     if ( !stats )
+         {
+@@ -59,17 +69,51 @@
+         exit( 1 );
+         }
+ 
++    unsigned long one, two;
++    if( vmstattype )
++	{
++	int oneset = 0, twoset = 0;
++	stats >> buf;
++	while(!stats.eof() && !(oneset && twoset))
++	    {
++	    if(!strcmp(buf, "pgpgin"))
++		{
++		stats >> one;
++		stats >> buf;
++		oneset = 1;
++		continue;
++		}
++	    if(!strcmp(buf, "pgpgout"))
++		{
++		stats >> two;
++		stats >> buf;
++		twoset = 1;
++		continue;
++		}
++	    stats.ignore(MAX_PROCSTAT_LENGTH, '\n');
++	    if(stats.eof())
++		break;
++	    stats >> buf;
++	    }
++	}
++    else
++{
+     // Find the line with 'page'
+     stats >> buf;
      while (strncmp(buf, "page", 9))
          {
          stats.ignore(MAX_PROCSTAT_LENGTH, '\n');
 +	if(stats.eof())
-+		break;
++	    break;
          stats >> buf;
          }
  
  	// read values
-     unsigned long one, two;
+-    unsigned long one, two;
 +    if(stats.eof())
-+	    one = two = 0; // TODO (Linux 2.6): get vmstat::pgpgin, vmstat::pgpgout
++	    one = two = 0;
 +    else
      stats >> one >> two;
++}
  
      // assume each "unit" is 1k.
+     // This is true for ext2, but seems to be 512 bytes
