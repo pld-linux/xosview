@@ -12,6 +12,7 @@ Release:	11
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
+# Source0-md5: bcbc0f02ac8944222ec677d504024c40
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-non-i386.patch
