@@ -15,7 +15,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	xpm-devel
 Exclusiveos:	Linux
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix	/usr/X11R6
 %define		_mandir	%{_prefix}/man
