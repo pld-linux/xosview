@@ -5,10 +5,10 @@ Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
 Release:	1
-Copyright:	GPL
+License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
-Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/xosview-%{version}.tar.gz
+Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/%{name}-%{version}.tar.gz
 Source1:	xosview.desktop
 Patch0:		xosview-sparc.patch
 Patch1:		xosview-serialmeter.patch
@@ -22,12 +22,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_mandir	%{_prefix}/man
 
 %description
-The xosview utility displays a set of bar graphs which show the current
-system state, including memory usage, CPU usage, system load, etc. Xosview
-runs under the X Window System.
+The xosview utility displays a set of bar graphs which show the
+current system state, including memory usage, CPU usage, system load,
+etc. Xosview runs under the X Window System.
 
-Install the xosview package if you need a graphical tool for monitoring
-your system's performance.
+Install the xosview package if you need a graphical tool for
+monitoring your system's performance.
 
 %description -l de
 xosview stellt den aktuellen Systemzustand mit Balkengrafiken dar -
@@ -40,8 +40,8 @@ l'utilisation mémoire, la charge CPU et l'utilisation du réseau. Très
 utile pour surveiller ces états.
 
 %description -l tr
-xosview sistemin o anki durumunu (iþlemci yükü, bellek ve að kullanýmý)
-küçük bir pencerede grafik ortamda sunar.
+xosview sistemin o anki durumunu (iþlemci yükü, bellek ve að
+kullanýmý) küçük bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
@@ -62,11 +62,11 @@ CFLAGS="$RPM_OPT_FLAGS -I/usr/include/g++" make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/usr/X11R6/share/applnk/Administration,%{_bindir},%{_mandir}/man1,%{_prefix}/lib/X11/app-defaults}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
 
 %{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
-install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Administration
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
@@ -74,8 +74,8 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644,root,root,0755)
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-/usr/X11R6/share/applnk/Administration/xosview.desktop
-%config /usr/X11R6/lib/X11/app-defaults/*
+%{_applnkdir}/Utilities/xosview.desktop
+%config %{_libdir}/X11/app-defaults/*
 %{_mandir}/man1/*
