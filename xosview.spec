@@ -53,7 +53,6 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 rm -f linux/*.o
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--disable-linux-memstat
 
@@ -66,8 +65,6 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_bindir},%{_mandir}/man1,%{
 %{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
