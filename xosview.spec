@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzie pod X monitoruj±ce zasoby systemowe
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -54,7 +54,7 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 rm -f linux/*.o
 
 %build
-%configure \
+%configure2_13 \
 	--disable-linux-memstat
 
 CFLAGS="%{rpmcflags} -I/usr/include/g++" make all
