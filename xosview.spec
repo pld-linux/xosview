@@ -1,11 +1,13 @@
 Summary:	An X Window System utility for monitoring system resources
 Summary(de):	X11-Util zur Anzeige von Systemressourcen
+Summary(es):	Utilitario X11 para visualizar los recursos del sistema
 Summary(fr):	Utilitaire X11 pour visualiser les ressources système
 Summary(pl):	Narzêdzie pod X11 monitoruj±ce zasoby systemowe
+Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -16,7 +18,6 @@ Patch0:		%{name}-sparc.patch
 Patch1:		%{name}-serialmeter.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
-Exclusiveos:	Linux
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix	/usr/X11R6
@@ -34,10 +35,20 @@ monitoring your system's performance.
 xosview stellt den aktuellen Systemzustand mit Balkengrafiken dar -
 Speichernutzung, CPU- und Netzwerkauslastung. Sehr nützlich.
 
+%description -l es
+xosview nos ofrece un conveniente gráfico de barras del estado
+actual del sistema - uso de memoria, carga de la CPU y uso de
+red. Muy útil para monitoración del estado de tu sistema.
+
 %description -l fr
 xosview offre un histogramme représentant l'état courant du système -
 l'utilisation mémoire, la charge CPU et l'utilisation du réseau. Très
 utile pour surveiller ces états.
+
+%description -l pt_BR
+O xosview oferece um conveniente gráfico de barras do estado atual
+do sistema - uso de memória, carga da CPU e uso de rede. Muito útil
+para monitoração do status do seu sistema.
 
 %description -l tr
 xosview sistemin o anki durumunu (iþlemci yükü, bellek ve að
