@@ -11,7 +11,7 @@ Version:	1.8.0
 Release:	11
 License:	GPL
 Group:		X11/Applications
-Source0:	http://prdownloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-non-i386.patch
@@ -26,7 +26,6 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 The xosview utility displays a set of bar graphs which show the
