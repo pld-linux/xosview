@@ -12,4 +12,5 @@ Icon=xosview.png
 Terminal=0
 Type=Application
 Categories=System;Utility;X-X11
+Encoding=UTF-8
 # vi: encoding=utf-8
