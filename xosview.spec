@@ -93,7 +93,7 @@ make all
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
+	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
 
 %{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
