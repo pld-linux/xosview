@@ -8,7 +8,7 @@ Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
 Version:	1.8.0
-Release:	10
+Release:	11
 License:	GPL
 Group:		X11/Applications
 Source0:	http://prdownloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
@@ -86,7 +86,7 @@ mv config/aclocal.m4 acinclude.m4
 %configure \
 	--disable-linux-memstat
 
-CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates -I/usr/include/g++" \
+CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -Wno-deprecated -I/usr/include/g++" \
 %{__make} all
 
 %install
