@@ -50,6 +50,8 @@ xosview group Administration
 xosview exec "xosview &"
 EOF
 
+strip --strip-unneeded $RPM_BUILD_ROOT%{_bindir}/*
+
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %clean
