@@ -14,7 +14,6 @@ Patch0:		xosview-sparc.patch
 Patch1:		xosview-serialmeter.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	xpm-devel
 Exclusiveos:	Linux
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
