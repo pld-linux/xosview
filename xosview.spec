@@ -8,6 +8,9 @@ Group(pl):	X11/Aplikacje
 Source0:	ftp://sunsite.unc.edu/pub/Linux/utils/status/xosview-%{version}.tar.gz
 Source1:	xosview.desktop
 Patch:		xosview-1.7.0-sparc.patch
+BuildRequires:	libstdc++-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	xpm-devel
 Exclusiveos:	Linux
 Buildroot:	/tmp/%{name}-%{version}-root
 
