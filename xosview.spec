@@ -78,7 +78,7 @@ mv config/aclocal.m4 acinclude.m4
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--disable-linux-memstat
 
