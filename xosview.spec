@@ -5,12 +5,13 @@ Summary(fr):	Utilitaire X11 pour visualiser les ressources système
 Summary(pl):	Narzêdzie pod X11 monitoruj±ce zasoby systemowe
 Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
+Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
-Version:	1.7.3
-Release:	10
+Version:	1.8.0
+Release:	9
 License:	GPL
 Group:		X11/Applications
-Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/%{name}-%{version}.tar.gz
+Source0:	http://prdownloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-non-i386.patch
@@ -18,15 +19,16 @@ Patch1:		%{name}-io_h.patch
 Patch2:		%{name}-ppc.patch
 Patch3:		%{name}-rpath.patch
 Patch4:		%{name}-proc.patch
-Patch5:		%{name}-gcc3.patch
+Patch5:		%{name}-procstat.patch
+URL:		http://xosview.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix	/usr/X11R6
-%define		_mandir	%{_prefix}/man
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
 
 %description
 The xosview utility displays a set of bar graphs which show the
@@ -92,7 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
 
-%{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
+%{__make} install \
+	PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
