@@ -1,7 +1,7 @@
 Summary:	An X Window System utility for monitoring system resources
 Summary(de):	X11-Util zur Anzeige von Systemressourcen
 Summary(fr):	Utilitaire X11 pour visualiser les ressources système
-Summary(pl):	Narzêdzie pod X monitoruj±ce zasoby systemowe
+Summary(pl):	Narzêdzie pod X11 monitoruj±ce zasoby systemowe
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
