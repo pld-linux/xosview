@@ -89,13 +89,13 @@ CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -Wno-deprecated -I/usr/include/g+
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_pixmapsdir}} \
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
 
 %{__make} install \
 	PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -105,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES TODO
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Utilities/xosview.desktop
+%{_desktopdir}/xosview.desktop
 %{_pixmapsdir}/*
 %{_libdir}/X11/app-defaults/*
 %{_mandir}/man1/*
