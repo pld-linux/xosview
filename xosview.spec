@@ -19,8 +19,10 @@ Patch2:		%{name}-ppc.patch
 Patch3:		%{name}-rpath.patch
 Patch4:		%{name}-proc.patch
 Patch5:		%{name}-gcc3.patch
-BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix	/usr/X11R6
@@ -77,7 +79,7 @@ mv config/configure.in .
 mv config/aclocal.m4 acinclude.m4
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 %configure \
 	--disable-linux-memstat
@@ -95,14 +97,12 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_pixmapsdir}} \
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf CHANGES TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc CHANGES TODO
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Utilities/xosview.desktop
 %{_pixmapsdir}/*
