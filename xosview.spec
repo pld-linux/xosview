@@ -3,14 +3,15 @@ Summary(de):	X11-Util zur Anzeige von Systemressourcen
 Summary(fr):	Utilitaire X11 pour visualiser les ressources système
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
-Version:	1.7.1
-Release:	4
+Version:	1.7.3
+Release:	1
 Copyright:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
-Source0:	ftp://sunsite.unc.edu/pub/Linux/utils/status/xosview-%{version}.tar.gz
+Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/xosview-%{version}.tar.gz
 Source1:	xosview.desktop
-Patch:		xosview-sparc.patch
+Patch0:		xosview-sparc.patch
+Patch1:		xosview-serialmeter.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	xpm-devel
@@ -47,6 +48,7 @@ küçük bir pencerede grafik ortamda sunar.
 %ifarch sparc
 %patch0 -p1
 %endif
+%patch1 -p1
 
 # --- XXX Cruft Alert!
 rm -f linux/*.o
