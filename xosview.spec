@@ -45,6 +45,11 @@ xosview offre un histogramme représentant l'état courant du système -
 l'utilisation mémoire, la charge CPU et l'utilisation du réseau. Très
 utile pour surveiller ces états.
 
+%description -l pl
+xosview wy¶wietla zestaw s³upków, które pokazuj± aktualny stan
+systemu, w tym wykorzystanie pamiêci, procesora itp. xosview dzia³a
+pod X Window System.
+
 %description -l pt_BR
 O xosview oferece um conveniente gráfico de barras do estado atual
 do sistema - uso de memória, carga da CPU e uso de rede. Muito útil
