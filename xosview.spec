@@ -7,7 +7,7 @@ Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
-Release:	9
+Release:	10
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
