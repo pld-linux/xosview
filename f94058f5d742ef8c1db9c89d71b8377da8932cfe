@@ -1,0 +1,2 @@
+- updated to 1.8.0 (release 9),
+- patches: removed outated gcc3, updated proc and merged procstat from RH.
