@@ -1,12 +1,13 @@
---- ./linux/serialmeter.cc.fred	Tue Feb 16 15:09:26 1999
-+++ ./linux/serialmeter.cc	Fri Jan 21 12:03:45 2000
-@@ -32,11 +32,11 @@
- #include <unistd.h>
- #if defined(GNULIBC) || defined(__GLIBC__)
+--- xosview-1.8.1/linux/serialmeter.cc.orig	2003-10-20 03:20:42.000000000 +0200
++++ xosview-1.8.1/linux/serialmeter.cc	2003-10-26 22:54:13.653499768 +0100
+@@ -35,12 +35,12 @@
+ #if !defined(__hppa__) && !defined(__mips__)
  #include <sys/io.h>
--#ifndef __alpha__
-+#if !defined(__alpha__) && !defined(__sparc__)
+ #endif
+-#if !defined(__alpha__) && !defined(__ia64__) && !defined(__hppa__) && !defined(__arm__) && !defined(__mips__)
++#if !defined(__alpha__) && !defined(__ia64__) && !defined(__hppa__) && !defined(__arm__) && !defined(__mips__) && !defined(__sparc__)
  #include <sys/perm.h>
+ #define HAVE_IOPERM
  #endif
  #else
 -#ifndef __alpha__
@@ -14,15 +15,3 @@
  #include <asm/io.h>
  #endif
  #endif
-@@ -72,7 +72,11 @@
- }
- 
- bool SerialMeter::getport(unsigned short int port){
-+#ifndef __i386__
-+  return 1;
-+#else
-   return ioperm(port, 1, 1) != -1;
-+#endif
- }
- 
- void SerialMeter::getserial( void ){

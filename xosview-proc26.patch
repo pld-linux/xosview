@@ -1,0 +1,35 @@
+--- xosview-1.8.1/linux/pagemeter.cc.orig	2003-10-20 03:24:32.000000000 +0200
++++ xosview-1.8.1/linux/pagemeter.cc	2003-10-27 00:03:33.041176728 +0100
+@@ -59,8 +59,12 @@
+ 
+   do {
+     stats >>buf;
+-  } while (strncasecmp(buf, "swap", 5));
++  } while (strncasecmp(buf, "swap", 5) && !stats.eof());
+ 
++  if(stats.eof())
++	  pageinfo_[pageindex_][0] = pageinfo_[pageindex_][1] = 0;
++  	  // TODO (Linux 2.6): get vmstat::pswpin and vmstat::pswpout
++  else
+   stats >>pageinfo_[pageindex_][0] >>pageinfo_[pageindex_][1];
+ 
+   int oldindex = (pageindex_+1)%2;
+--- xosview-1.8.1/linux/diskmeter.cc.orig	2003-10-20 02:59:25.000000000 +0200
++++ xosview-1.8.1/linux/diskmeter.cc	2003-10-27 00:02:56.498732024 +0100
+@@ -64,11 +64,16 @@
+     while (strncmp(buf, "page", 9))
+         {
+         stats.ignore(MAX_PROCSTAT_LENGTH, '\n');
++	if(stats.eof())
++		break;
+         stats >> buf;
+         }
+ 
+ 	// read values
+     unsigned long one, two;
++    if(stats.eof())
++	    one = two = 0; // TODO (Linux 2.6): get vmstat::pgpgin, vmstat::pgpgout
++    else
+     stats >> one >> two;
+ 
+     // assume each "unit" is 1k.

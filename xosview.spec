@@ -7,26 +7,27 @@ Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
-Version:	1.8.0
-Release:	11
+Version:	1.8.1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
-# Source0-md5: bcbc0f02ac8944222ec677d504024c40
+# Source0-md5:	1cb7a3e09d1cf8551f3c10e76d5d92ed
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-non-i386.patch
 Patch1:		%{name}-io_h.patch
 Patch2:		%{name}-MeterMaker.patch
-Patch3:		%{name}-rpath.patch
-Patch4:		%{name}-proc.patch
-Patch5:		%{name}-procstat.patch
+Patch3:		%{name}-proc.patch
+Patch4:		%{name}-proc26.patch
 URL:		http://xosview.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
 
 %description
 The xosview utility displays a set of bar graphs which show the
@@ -67,16 +68,14 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch1 -p1 -- still needed? needs testing on misc archs
+#%patch2 -p1 -- as above
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 # --- XXX Cruft Alert!
-rm -f linux/*.o
-mv config/configure.in .
-mv config/aclocal.m4 acinclude.m4
+ln -sf config/configure.in .
+sed -e 's/ -O4//' config/aclocal.m4 > acinclude.m4
 
 %build
 %{__aclocal}
@@ -84,16 +83,18 @@ mv config/aclocal.m4 acinclude.m4
 %configure \
 	--disable-linux-memstat
 
-CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -Wno-deprecated -I/usr/include/g++" \
-%{__make} all
+%{__make} all \
+	CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
+	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_appdefsdir}}
 
 %{__make} install \
-	PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
+	PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix} \
+	MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
+	XAPPLOADDIR=$RPM_BUILD_ROOT%{_appdefsdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -107,5 +108,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_desktopdir}/xosview.desktop
 %{_pixmapsdir}/*
-%{_libdir}/X11/app-defaults/*
+%{_appdefsdir}/*
 %{_mandir}/man1/*
