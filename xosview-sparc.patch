@@ -1,0 +1,26 @@
+--- xosview-1.7.0/config/Makefile.linux.in.sparc	Sun Jan 31 03:51:49 1999
++++ xosview-1.7.0/config/Makefile.linux.in	Wed Mar  3 11:02:17 1999
+@@ -16,7 +16,6 @@
+ pagemeter.o \
+ netmeter.o \
+ intmeter.o \
+-serialmeter.o \
+ loadmeter.o \
+ btrymeter.o \
+ diskmeter.o \
+--- xosview-1.7.0/linux/MeterMaker.cc.sparc	Mon Feb  1 12:28:49 1999
++++ xosview-1.7.0/linux/MeterMaker.cc	Wed Mar  3 11:02:17 1999
+@@ -54,11 +54,13 @@
+   if (_xos->isResourceTrue("disk"))
+       push(new DiskMeter(_xos, atof(_xos->getResource("diskBandwidth"))));
+ 
++#if 0
+   // check for the serial meters.
+   for (int i = 0 ; i < SerialMeter::numDevices() ; i++)
+     if (_xos->isResourceTrue(SerialMeter::getResourceName(
+       (SerialMeter::Device)i)))
+         push(new SerialMeter(_xos, (SerialMeter::Device)i));
++#endif
+ 
+   // check for the interrupt meter
+   if (_xos->isResourceTrue("interrupts")) {
