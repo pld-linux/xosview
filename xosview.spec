@@ -7,19 +7,14 @@ Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
-Version:	1.8.1
-Release:	2
+Version:	1.8.2
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
-# Source0-md5:	1cb7a3e09d1cf8551f3c10e76d5d92ed
+# Source0-md5:	cc8b261b1f8d82da29239f1cc2ee55e9
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-non-i386.patch
-Patch1:		%{name}-io_h.patch
-Patch2:		%{name}-MeterMaker.patch
-Patch3:		%{name}-proc.patch
-Patch4:		%{name}-proc26.patch
 URL:		http://xosview.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -67,11 +62,6 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
-%patch0 -p1
-#%patch1 -p1 -- still needed? needs testing on misc archs
-#%patch2 -p1 -- as above
-%patch3 -p1
-%patch4 -p1
 
 # --- XXX Cruft Alert!
 ln -sf config/configure.in .
@@ -80,7 +70,7 @@ sed -e 's/ -O4//' config/aclocal.m4 > acinclude.m4
 %build
 %{__aclocal}
 %{__autoconf}
-cp -f /usr/share/automake/config.sub config
+cp -f %{_datadir}/automake/config.sub config
 %configure \
 	--disable-linux-memstat
 
