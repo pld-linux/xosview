@@ -1,0 +1,80 @@
+--- xosview-1.7.3/linux/netmeter.cc.proc	Fri Nov 12 05:32:32 1999
++++ xosview-1.7.3/linux/netmeter.cc	Tue Dec 18 17:21:59 2001
+@@ -31,6 +31,7 @@
+ 
+ #include <unistd.h>
+ #include <fstream.h>
++#include <string>
+ #include <stdlib.h>
+ #include <sys/socket.h>
+ #include <sys/ioctl.h>
+@@ -58,7 +59,7 @@
+ 
+ void NetMeter::checkOSVersion(void)
+     {
+-    ifstream ifs("/proc/sys/kernel/osrelease");
++    std::ifstream ifs("/proc/sys/kernel/osrelease");
+     if (!ifs)
+         {
+         cerr <<"Can not open file : " << "/proc/sys/kernel/osrelease" <<endl;
+@@ -75,7 +76,7 @@
+     if (major > 2 || (major == 2 && minor >= 1))
+         {
+ 	// check presence of iacct and oacct chains
+-        ifstream chains("/proc/net/ip_fwchains");
++        std::ifstream chains("/proc/net/ip_fwchains");
+ 	int n = 0;
+ 	char buf[1024];
+         
+@@ -133,7 +134,7 @@
+ 
+ void NetMeter::checkeventNew(void)
+     {
+-    ifstream ifs(_netfilename);
++    std::ifstream ifs(_netfilename);
+ 
+     if (!ifs)
+         {
+@@ -142,6 +143,7 @@
+         return;
+         }
+ 
++    std::string str_in;
+     unsigned long in, out, ig;
+     unsigned long totin = 0, totout = 0;
+     char buf[1024];
+@@ -171,8 +173,14 @@
+ 	  while (!ifs.eof())
+ 	      {
+ 	      ifs.ignore(1024, ':');
+-	      ifs >> in >> ig >> ig >> ig >> ig >> ig >> ig >> ig >> out;
+-
++	      ifs >> str_in;
++	      if (str_in == "No")
++		continue;
++	      else
++		{
++		  in = strtoul(str_in.c_str(), NULL, 10);
++		  ifs >> ig >> ig >> ig >> ig >> ig >> ig >> ig >> out;
++		}
+ 	      if (!ifs.eof())
+ 		  {
+ 		  totin += in;
+@@ -208,7 +216,7 @@
+     fields_[2] = maxpackets_;     // assume no
+     fields_[0] = fields_[1] = 0;  // network activity
+     
+-    ifstream ifs(_netfilename);
++    std::ifstream ifs(_netfilename);
+     if (!ifs)
+         {
+         cerr <<"Can not open file : " << _netfilename <<endl;
+@@ -228,7 +236,7 @@
+         }
+ 
+     char c;
+-    unsigned long sa, da, sm, dm, bytes;
++    unsigned long dec, hex, sa, da, sm, dm, bytes;
+     unsigned long tot_in = 0, tot_out = 0;
+     
+     ifs.ignore(1024, '\n');
