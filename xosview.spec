@@ -11,7 +11,10 @@ Release:	3
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
+Group(es):	X11/Aplicaciones
 Group(pl):	X11/Aplikacje
+Group(pt_BR):	X11/Aplicações
+Group(pt):	X11/Aplicações
 Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-sparc.patch
@@ -36,9 +39,9 @@ xosview stellt den aktuellen Systemzustand mit Balkengrafiken dar -
 Speichernutzung, CPU- und Netzwerkauslastung. Sehr nützlich.
 
 %description -l es
-xosview nos ofrece un conveniente gráfico de barras del estado
-actual del sistema - uso de memoria, carga de la CPU y uso de
-red. Muy útil para monitoración del estado de tu sistema.
+xosview nos ofrece un conveniente gráfico de barras del estado actual
+del sistema - uso de memoria, carga de la CPU y uso de red. Muy útil
+para monitoración del estado de tu sistema.
 
 %description -l fr
 xosview offre un histogramme représentant l'état courant du système -
@@ -51,9 +54,9 @@ systemu, w tym wykorzystanie pamiêci, procesora itp. xosview dzia³a
 pod X Window System.
 
 %description -l pt_BR
-O xosview oferece um conveniente gráfico de barras do estado atual
-do sistema - uso de memória, carga da CPU e uso de rede. Muito útil
-para monitoração do status do seu sistema.
+O xosview oferece um conveniente gráfico de barras do estado atual do
+sistema - uso de memória, carga da CPU e uso de rede. Muito útil para
+monitoração do status do seu sistema.
 
 %description -l tr
 xosview sistemin o anki durumunu (iþlemci yükü, bellek ve að
