@@ -1,17 +1,19 @@
-Summary:	An X Window System utility for monitoring system resources.
+Summary:	An X Window System utility for monitoring system resources
 Summary(de):	X11-Util zur Anzeige von Systemressourcen
 Summary(fr):	Utilitaire X11 pour visualiser les ressources système
+Summary(pl):	Narzêdzie pod X monitoruj±ce zasoby systemowe
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
 Release:	1
 License:	GPL
 Group:		X11/Applications
+Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/%{name}-%{version}.tar.gz
-Source1:	xosview.desktop
-Patch0:		xosview-sparc.patch
-Patch1:		xosview-serialmeter.patch
+Source1:	%{name}.desktop
+Patch0:		%{name}-sparc.patch
+Patch1:		%{name}-serialmeter.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 Exclusiveos:	Linux
@@ -33,7 +35,6 @@ xosview stellt den aktuellen Systemzustand mit Balkengrafiken dar -
 Speichernutzung, CPU- und Netzwerkauslastung. Sehr nützlich.
 
 %description -l fr
-
 xosview offre un histogramme représentant l'état courant du système -
 l'utilisation mémoire, la charge CPU et l'utilisation du réseau. Très
 utile pour surveiller ces états.
@@ -56,7 +57,7 @@ rm -f linux/*.o
 %configure \
 	--disable-linux-memstat
 
-CFLAGS="$RPM_OPT_FLAGS -I/usr/include/g++" make all
+CFLAGS="%{rpmcflags} -I/usr/include/g++" make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
