@@ -8,7 +8,7 @@ Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
 Version:	1.8.0
-Release:	9
+Release:	10
 License:	GPL
 Group:		X11/Applications
 Source0:	http://prdownloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
@@ -16,7 +16,7 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-non-i386.patch
 Patch1:		%{name}-io_h.patch
-Patch2:		%{name}-ppc.patch
+Patch2:		%{name}-MeterMaker.patch
 Patch3:		%{name}-rpath.patch
 Patch4:		%{name}-proc.patch
 Patch5:		%{name}-procstat.patch
