@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=xosview
 Comment=OS Stats Viewer
-Comment[pl]=Podgl±d stanu systemu
+Comment[pl]=PodglÄ…d stanu systemu
 Exec=/usr/X11R6/xosview
 Terminal=0
 Type=Application
+# vi: encoding=utf-8
