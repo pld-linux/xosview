@@ -8,7 +8,7 @@ Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
 Version:	1.8.1
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
@@ -80,6 +80,7 @@ sed -e 's/ -O4//' config/aclocal.m4 > acinclude.m4
 %build
 %{__aclocal}
 %{__autoconf}
+cp -f /usr/share/automake/config.sub config
 %configure \
 	--disable-linux-memstat
 
