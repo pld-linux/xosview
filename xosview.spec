@@ -7,7 +7,7 @@ Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Name:		xosview
 Version:	1.7.3
-Release:	3
+Release:	9
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -17,8 +17,13 @@ Group(pt_BR):	X11/Aplicações
 Group(pt):	X11/Aplicações
 Source0:	http://lore.ece.utexas.edu/~bgrayson/xosview/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		%{name}-sparc.patch
-Patch1:		%{name}-serialmeter.patch
+Source2:	%{name}.png
+Patch0:		%{name}-non-i386.patch
+Patch1:		%{name}-io_h.patch
+Patch2:		%{name}-ppc.patch
+Patch3:		%{name}-rpath.patch
+Patch4:		%{name}-proc.patch
+Patch5:		%{name}-gcc3.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,27 +69,36 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
-%ifarch sparc
 %patch0 -p1
-%endif
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 # --- XXX Cruft Alert!
 rm -f linux/*.o
+mv config/configure.in .
+mv config/aclocal.m4 acinclude.m4
 
 %build
-%configure2_13 \
+aclocal
+autoconf
+%configure \
 	--disable-linux-memstat
 
-CFLAGS="%{rpmcflags} -I/usr/include/g++" make all
+CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates -I/usr/include/g++" \
+make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Utilities,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults}
 
 %{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,5 +107,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Utilities/xosview.desktop
-%config %{_libdir}/X11/app-defaults/*
+%{_pixmapsdir}/*
+%{_libdir}/X11/app-defaults/*
 %{_mandir}/man1/*
