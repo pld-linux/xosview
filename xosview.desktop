@@ -1,8 +1,14 @@
 [Desktop Entry]
 Name=Xosview
 Comment=OS Stats Viewer
+Comment[de]=X11-Util zur Anzeige von Systemressourcen
+Comment[es]=Utilitario X11 para visualizar los recursos del sistema
+Comment[fr]=Utilitaire X11 pour visualiser les ressources système
 Comment[pl]=PodglÄ…d statystyk systemowych
-Exec=/usr/X11R6/xosview
+Comment[pt_BR]=Utilitário X11 para visualizar os recursos do sistema
+Comment[tr]=Sistem kaynaklarýný denetleyen X11 yardýmcý programý                                                                        
+Exec=xosview
+Icon=xosview.png
 Terminal=0
 Type=Application
 # vi: encoding=utf-8
