@@ -62,7 +62,7 @@ CFLAGS="$RPM_OPT_FLAGS -I/usr/include/g++" make all
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/usr/X11R6/share/applnk/Administration,%{_bindir},%{_mandir}/man1,%{_prefix}/lib/X11/app-defaults}
 
-make install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
+%{__make} install PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Administration
 
