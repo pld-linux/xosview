@@ -11,6 +11,6 @@ Exec=xosview
 Icon=xosview.png
 Terminal=false
 Type=Application
-Categories=System;Utility;X-X11
+Categories=System;Utility;X-X11;
 Encoding=UTF-8
 # vi: encoding=utf-8
