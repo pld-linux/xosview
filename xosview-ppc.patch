@@ -1,6 +1,19 @@
---- xosview-1.7.3/linux/MeterMaker.cc	Fri Nov 12 00:13:22 1999
-+++ xosview-1.7.3/linux/MeterMaker.cc.ppc	Thu Jan 25 07:48:31 2001
-@@ -56,7 +56,7 @@
+diff -ur xosview-1.8.0.orig/config/Makefile.linux.in xosview-1.8.0/config/Makefile.linux.in
+--- xosview-1.8.0.orig/config/Makefile.linux.in	Sun Feb 24 23:00:47 2002
++++ xosview-1.8.0/config/Makefile.linux.in	Fri Oct 11 00:27:54 2002
+@@ -23,7 +23,7 @@
+ lmstemp.o \
+ MeterMaker.o
+ 
+-FAIL_ARCHS =3D m68k sparc
++FAIL_ARCHS = m68k powerpc sparc
+ ifneq (,$(findstring @host_cpu@, $(FAIL_ARCHS)))
+ # nothing else for m68k
+ else
+diff -ur xosview-1.8.0.orig/linux/MeterMaker.cc xosview-1.8.0/linux/MeterMaker.cc
+--- xosview-1.8.0.orig/linux/MeterMaker.cc	Sun Feb 24 23:00:47 2002
++++ xosview-1.8.0/linux/MeterMaker.cc	Fri Oct 11 00:18:11 2002
+@@ -57,7 +57,7 @@
        push(new DiskMeter(_xos, atof(_xos->getResource("diskBandwidth"))));
  
    // check for the serial meters.
@@ -9,30 +22,3 @@
    for (int i = 0 ; i < SerialMeter::numDevices() ; i++)
      if (_xos->isResourceTrue(SerialMeter::getResourceName(
        (SerialMeter::Device)i)))
-
---- xosview-1.7.3/config/Makefile.linux.in	Fri Nov 12 00:13:22 1999
-+++ xosview-1.7.3/config/Makefile.linux.in.ppc	Thu Jan 25 07:48:19 2001
-@@ -22,11 +22,22 @@
- raidmeter.o \
- MeterMaker.o
- 
-+addserial = 
-+
- ifeq (@host_cpu@, m68k)
--# nothing else for m68k
-+  addserial = no
-+endif
-+
-+ifeq (@host_cpu@, powerpc)
-+  addserial = yes
-+endif	
-+
-+ifdef addserial
-+# nothing else for m68k, powerpc
- else
- OBJS += serialmeter.o
- endif
-+
- 
- CFILES := $(OBJS:.o=.cc)
- DEPFILES := $(OBJS:%=.%.d)

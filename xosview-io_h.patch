@@ -1,4 +1,4 @@
---- ./linux/serialmeter.cc.orig	Fri Mar 31 11:23:59 2000
+--- ./linux.orig/serialmeter.cc	Fri Mar 31 11:23:59 2000
 +++ ./linux/serialmeter.cc	Fri Mar 31 11:24:44 2000
 @@ -31,7 +31,7 @@
  
@@ -9,6 +9,7 @@
  #if !defined(__alpha__) && !defined(__sparc__)
  #include <sys/perm.h>
  #endif
+--- ./linux.orig/io_patched.h	Thu Jan  1 01:00:00 1970
 +++ ./linux/io_patched.h	Fri Mar 31 11:22:59 2000
 @@ -0,0 +1,46 @@
 +/* Copyright (C) 1996 Free Software Foundation, Inc.
