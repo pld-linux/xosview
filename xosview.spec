@@ -83,7 +83,7 @@ autoconf
 	--disable-linux-memstat
 
 CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions -fno-implicit-templates -I/usr/include/g++" \
-make all
+%{__make} all
 
 %install
 rm -rf $RPM_BUILD_ROOT
