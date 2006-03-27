@@ -7,15 +7,14 @@ Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr):	Sistem kaynaklarýný denetleyen X11 yardýmcý programý
 Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ÐÎ¼àÊÓ¹¤¾ß
 Name:		xosview
-Version:	1.8.2
-Release:	3
+Version:	1.8.3
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
-# Source0-md5:	cc8b261b1f8d82da29239f1cc2ee55e9
+# Source0-md5:	88cf9fecfcc27a42d132d1f983c1f091
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-xrm_fix.patch
 URL:		http://xosview.sourceforge.net/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -63,7 +62,6 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
-%patch0 -p1
 
 # --- XXX Cruft Alert!
 ln -sf config/configure.in .
