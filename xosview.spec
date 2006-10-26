@@ -15,6 +15,7 @@ Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
 # Source0-md5:	88cf9fecfcc27a42d132d1f983c1f091
 Source1:	%{name}.desktop
 Source2:	%{name}.png
+Patch0:		%{name}-ac.patch
 URL:		http://xosview.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -67,6 +68,8 @@ kullanýmý) küçük bir pencerede grafik ortamda sunar.
 # --- XXX Cruft Alert!
 ln -sf config/configure.in .
 sed -e 's/ -O4//' config/aclocal.m4 > acinclude.m4
+
+%patch0 -p1
 
 %build
 %{__aclocal}
