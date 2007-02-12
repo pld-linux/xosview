@@ -1,11 +1,11 @@
 Summary:	An X Window System utility for monitoring system resources
-Summary(de.UTF-8):   X11-Util zur Anzeige von Systemressourcen
-Summary(es.UTF-8):   Utilitario X11 para visualizar los recursos del sistema
-Summary(fr.UTF-8):   Utilitaire X11 pour visualiser les ressources système
-Summary(pl.UTF-8):   Narzędzie pod X11 monitorujące zasoby systemowe
-Summary(pt_BR.UTF-8):   Utilitário X11 para visualizar os recursos do sistema
-Summary(tr.UTF-8):   Sistem kaynaklarını denetleyen X11 yardımcı programı
-Summary(zh_CN.UTF-8):   系统资源的图形监视工具
+Summary(de.UTF-8):	X11-Util zur Anzeige von Systemressourcen
+Summary(es.UTF-8):	Utilitario X11 para visualizar los recursos del sistema
+Summary(fr.UTF-8):	Utilitaire X11 pour visualiser les ressources système
+Summary(pl.UTF-8):	Narzędzie pod X11 monitorujące zasoby systemowe
+Summary(pt_BR.UTF-8):	Utilitário X11 para visualizar os recursos do sistema
+Summary(tr.UTF-8):	Sistem kaynaklarını denetleyen X11 yardımcı programı
+Summary(zh_CN.UTF-8):	系统资源的图形监视工具
 Name:		xosview
 Version:	1.8.3
 Release:	1
