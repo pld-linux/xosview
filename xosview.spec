@@ -1,11 +1,11 @@
 Summary:	An X Window System utility for monitoring system resources
-Summary(de):	X11-Util zur Anzeige von Systemressourcen
-Summary(es):	Utilitario X11 para visualizar los recursos del sistema
-Summary(fr):	Utilitaire X11 pour visualiser les ressources système
-Summary(pl):	Narzêdzie pod X11 monitoruj±ce zasoby systemowe
-Summary(pt_BR):	Utilitário X11 para visualizar os recursos do sistema
-Summary(tr):	Sistem kaynaklarını denetleyen X11 yardımcı programı
-Summary(zh_CN):	ÏµÍ³×ÊÔ´µÄÍ¼ĞÎ¼àÊÓ¹¤¾ß
+Summary(de.UTF-8):   X11-Util zur Anzeige von Systemressourcen
+Summary(es.UTF-8):   Utilitario X11 para visualizar los recursos del sistema
+Summary(fr.UTF-8):   Utilitaire X11 pour visualiser les ressources systÃ¨me
+Summary(pl.UTF-8):   NarzÄ™dzie pod X11 monitorujÄ…ce zasoby systemowe
+Summary(pt_BR.UTF-8):   UtilitÃ¡rio X11 para visualizar os recursos do sistema
+Summary(tr.UTF-8):   Sistem kaynaklarÄ±nÄ± denetleyen X11 yardÄ±mcÄ± programÄ±
+Summary(zh_CN.UTF-8):   ç³»ç»Ÿèµ„æºçš„å›¾å½¢ç›‘è§†å·¥å…·
 Name:		xosview
 Version:	1.8.3
 Release:	1
@@ -34,33 +34,33 @@ etc. Xosview runs under the X Window System.
 Install the xosview package if you need a graphical tool for
 monitoring your system's performance.
 
-%description -l de
+%description -l de.UTF-8
 xosview stellt den aktuellen Systemzustand mit Balkengrafiken dar -
-Speichernutzung, CPU- und Netzwerkauslastung. Sehr nützlich.
+Speichernutzung, CPU- und Netzwerkauslastung. Sehr nÃ¼tzlich.
 
-%description -l es
-xosview nos ofrece un conveniente gráfico de barras del estado actual
-del sistema - uso de memoria, carga de la CPU y uso de red. Muy útil
-para monitoración del estado de tu sistema.
+%description -l es.UTF-8
+xosview nos ofrece un conveniente grÃ¡fico de barras del estado actual
+del sistema - uso de memoria, carga de la CPU y uso de red. Muy Ãºtil
+para monitoraciÃ³n del estado de tu sistema.
 
-%description -l fr
-xosview offre un histogramme représentant l'état courant du système -
-l'utilisation mémoire, la charge CPU et l'utilisation du réseau. Très
-utile pour surveiller ces états.
+%description -l fr.UTF-8
+xosview offre un histogramme reprÃ©sentant l'Ã©tat courant du systÃ¨me -
+l'utilisation mÃ©moire, la charge CPU et l'utilisation du rÃ©seau. TrÃ¨s
+utile pour surveiller ces Ã©tats.
 
-%description -l pl
-xosview wy¶wietla zestaw s³upków, które pokazuj± aktualny stan
-systemu, w tym wykorzystanie pamiêci, procesora itp. xosview dzia³a
+%description -l pl.UTF-8
+xosview wyÅ›wietla zestaw sÅ‚upkÃ³w, ktÃ³re pokazujÄ… aktualny stan
+systemu, w tym wykorzystanie pamiÄ™ci, procesora itp. xosview dziaÅ‚a
 pod X Window System.
 
-%description -l pt_BR
-O xosview oferece um conveniente gráfico de barras do estado atual do
-sistema - uso de memória, carga da CPU e uso de rede. Muito útil para
-monitoração do status do seu sistema.
+%description -l pt_BR.UTF-8
+O xosview oferece um conveniente grÃ¡fico de barras do estado atual do
+sistema - uso de memÃ³ria, carga da CPU e uso de rede. Muito Ãºtil para
+monitoraÃ§Ã£o do status do seu sistema.
 
-%description -l tr
-xosview sistemin o anki durumunu (işlemci yükü, bellek ve ağ
-kullanımı) küçük bir pencerede grafik ortamda sunar.
+%description -l tr.UTF-8
+xosview sistemin o anki durumunu (iÅŸlemci yÃ¼kÃ¼, bellek ve aÄŸ
+kullanÄ±mÄ±) kÃ¼Ã§Ã¼k bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
