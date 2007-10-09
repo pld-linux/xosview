@@ -1,0 +1,4 @@
+- wmconfig file replaced by desktop file,
+- added passing LDFLAS"-s" to ./configure environment (stripping in %%install
+  is not neccessary now),
+- Group changed to X11/Applications.
