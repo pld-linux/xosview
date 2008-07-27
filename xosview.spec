@@ -8,7 +8,7 @@ Summary(tr.UTF-8):	Sistem kaynaklarını denetleyen X11 yardımcı programı
 Summary(zh_CN.UTF-8):	系统资源的图形监视工具
 Name:		xosview
 Version:	1.8.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
