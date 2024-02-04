@@ -7,12 +7,12 @@ Summary(pt_BR.UTF-8):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr.UTF-8):	Sistem kaynaklarını denetleyen X11 yardımcı programı
 Summary(zh_CN.UTF-8):	系统资源的图形监视工具
 Name:		xosview
-Version:	1.8.4
+Version:	1.9.4
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	https://downloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
-# Source0-md5:	173b9f8b7a41c3212ad5b48ac7f4c76b
+Source0:	http://www.pogo.org.uk/~mark/xosview/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	8b76425db68c8146ac10e8e123af60ba
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-c++.patch
@@ -67,30 +67,24 @@ kullanımı) küçük bir pencerede grafik ortamda sunar.
 %setup -q
 %patch0 -p1
 
-# --- XXX Cruft Alert!
-ln -sf config/configure.in .
-sed -e '/EXTRA_CXXFLAGS/ s/ -O3/ %{rpmcxxflags} %{rpmcppflags}/' config/aclocal.m4 > acinclude.m4
-
 %build
-%{__aclocal}
-%{__autoconf}
-cp -f %{_datadir}/automake/config.sub config
-%configure
-
-%{__make}
+%{__make} \
+	CXX="%{__cxx}" \
+	LDFLAGS="%{rpmldflags}" \
+	OPTFLAGS="%{rpmcxxflags} %{rpmcppflags}" \
+	PLATFORM=linux
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_appdefsdir}}
+install -d $RPM_BUILD_ROOT{%{_appdefsdir},%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
-	PREFIX_TO_USE=$RPM_BUILD_ROOT%{_prefix} \
-	MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	XAPPLOADDIR=$RPM_BUILD_ROOT%{_appdefsdir}
+	DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p Xdefaults $RPM_BUILD_ROOT%{_appdefsdir}/XOsview
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
