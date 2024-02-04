@@ -7,18 +7,14 @@ Summary(pt_BR.UTF-8):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr.UTF-8):	Sistem kaynaklarını denetleyen X11 yardımcı programı
 Summary(zh_CN.UTF-8):	系统资源的图形监视工具
 Name:		xosview
-Version:	1.9.4
+Version:	1.24
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.pogo.org.uk/~mark/xosview/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	8b76425db68c8146ac10e8e123af60ba
-Source1:	%{name}.desktop
-Source2:	%{name}.png
-Patch0:		%{name}-c++.patch
+# Source0-md5:	3da6fe20bba2539255e9349762ebe0d8
+Patch0:		%{name}-desktop.patch
 URL:		https://xosview.sourceforge.net/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXpm-devel
@@ -76,15 +72,13 @@ kullanımı) küçük bir pencerede grafik ortamda sunar.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_appdefsdir},%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT%{_appdefsdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=%{_prefix}
 
 cp -p Xdefaults $RPM_BUILD_ROOT%{_appdefsdir}/XOsview
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -94,6 +88,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES COPYING COPYING.BSD README README.linux TODO
 %attr(755,root,root) %{_bindir}/xosview
 %{_desktopdir}/xosview.desktop
-%{_pixmapsdir}/xosview.png
+%{_iconsdir}/hicolor/32x32/apps/xosview.png
 %{_appdefsdir}/XOsview
 %{_mandir}/man1/xosview.1*
