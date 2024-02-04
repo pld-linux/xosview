@@ -1,0 +1,40 @@
+--- xosview-1.8.4/xwin.cc.orig	2015-06-04 16:49:00.000000000 +0200
++++ xosview-1.8.4/xwin.cc	2024-02-04 12:46:57.721543774 +0100
+@@ -418,8 +418,6 @@ const char *XWin::getResource( const cha
+   {
+     std::cerr << "Error:  Couldn't find '" << name << "' resource in the resource database!\n";
+     exit (-1);
+-      /*  Some compilers aren't smart enough to know that exit() exits.  */
+-    return '\0';
+   }
+ }
+ 
+--- xosview-1.8.4/linux/lmstemp.cc.orig	2015-06-04 18:10:58.000000000 +0200
++++ xosview-1.8.4/linux/lmstemp.cc	2024-02-04 12:53:45.486001390 +0100
+@@ -154,7 +154,7 @@ void LmsTemp::getlmstemp( void ){
+     std::ifstream file( _filename );
+ 
+     if ( !file ){
+-	std::cerr <<"Can not open file : " <<file << std::endl;
++	std::cerr <<"Can not open file : " <<_filename << std::endl;
+ 	parent_->done(1);
+ 	return;
+     }
+@@ -169,7 +169,7 @@ void LmsTemp::getlmstemp( void ){
+       strcpy(p, "_input");
+       std::ifstream file1(f);
+       if ( !file1 ){
+-	  std::cerr <<"Can not open file : " <<file1 << std::endl;
++	  std::cerr <<"Can not open file : " <<f << std::endl;
+ 	  parent_->done(1);
+ 	  return;
+       }
+@@ -178,7 +178,7 @@ void LmsTemp::getlmstemp( void ){
+       strcpy(p, "_max");
+       std::ifstream file2(f);
+       if ( !file2 ){
+-	  std::cerr <<"Can not open file : " <<file2 << std::endl;
++	  std::cerr <<"Can not open file : " <<f << std::endl;
+ 	  parent_->done(1);
+ 	  return;
+       }

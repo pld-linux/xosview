@@ -7,19 +7,20 @@ Summary(pt_BR.UTF-8):	Utilitário X11 para visualizar os recursos do sistema
 Summary(tr.UTF-8):	Sistem kaynaklarını denetleyen X11 yardımcı programı
 Summary(zh_CN.UTF-8):	系统资源的图形监视工具
 Name:		xosview
-Version:	1.8.3
-Release:	2
-License:	GPL
+Version:	1.8.4
+Release:	1
+License:	GPL v2
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/xosview/%{name}-%{version}.tar.gz
-# Source0-md5:	88cf9fecfcc27a42d132d1f983c1f091
+Source0:	https://downloads.sourceforge.net/xosview/%{name}-%{version}.tar.gz
+# Source0-md5:	173b9f8b7a41c3212ad5b48ac7f4c76b
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-ac.patch
-URL:		http://xosview.sourceforge.net/
+Patch0:		%{name}-c++.patch
+URL:		https://xosview.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires:	xorg-lib-libXt >= 1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,22 +65,19 @@ kullanımı) küçük bir pencerede grafik ortamda sunar.
 
 %prep
 %setup -q
+%patch0 -p1
 
 # --- XXX Cruft Alert!
 ln -sf config/configure.in .
-sed -e 's/ -O4//' config/aclocal.m4 > acinclude.m4
-
-%patch0 -p1
+sed -e '/EXTRA_CXXFLAGS/ s/ -O3/ %{rpmcxxflags} %{rpmcppflags}/' config/aclocal.m4 > acinclude.m4
 
 %build
 %{__aclocal}
 %{__autoconf}
 cp -f %{_datadir}/automake/config.sub config
-%configure \
-	--disable-linux-memstat
+%configure
 
-%{__make} all \
-	CFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -99,9 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES TODO
-%attr(755,root,root) %{_bindir}/*
+%doc CHANGES COPYING COPYING.BSD README README.linux TODO
+%attr(755,root,root) %{_bindir}/xosview
 %{_desktopdir}/xosview.desktop
-%{_pixmapsdir}/*
-%{_appdefsdir}/*
-%{_mandir}/man1/*
+%{_pixmapsdir}/xosview.png
+%{_appdefsdir}/XOsview
+%{_mandir}/man1/xosview.1*
